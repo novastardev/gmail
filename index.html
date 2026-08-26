@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Sign in - Google Accounts</title>
+    <!-- Google Sans / Roboto Typography & Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #202124;
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 450px;
+            padding: 24px;
+        }
+
+        @media (min-width: 601px) {
+            .card {
+                padding: 40px 40px 36px 40px;
+                border: 1px solid #dadce0;
+                border-radius: 8px;
+            }
+        }
+
+        .card {
+            width: 100%;
+            text-align: center;
+            background: #fff;
+        }
+
+        .google-logo {
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .google-logo svg {
+            width: 75px;
+            height: 24px;
+        }
+
+        h1 {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.3333;
+            margin-bottom: 8px;
+            color: #202124;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #202124;
+            margin-bottom: 32px;
+        }
+
+        .email-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 12px 2px 2px;
+            border: 1px solid #dadce0;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #3c4043;
+            background: #fff;
+            gap: 8px;
+        }
+
+        .email-chip img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .text-field {
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            height: 56px;
+            padding: 13px 48px 13px 15px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            color: #202124;
+            background: transparent;
+        }
+
+        input:focus {
+            border-color: #1a73e8;
+            border-width: 2px;
+            padding: 13px 48px 13px 14px;
+        }
+
+        .show-pass {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #5f6368;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .show-pass:hover {
+            background: rgba(60,64,67,0.08);
+            color: #1a73e8;
+        }
+
+        .show-pass .material-icons {
+            font-size: 20px;
+        }
+
+        .helper-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            margin-bottom: 36px;
+            text-align: left;
+        }
+
+        .link {
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        button.next-btn {
+            font-family: 'Google Sans', sans-serif;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0 24px;
+            height: 36px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        button.next-btn:hover {
+            background-color: #1b66c9;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+        }
+
+        /* Footer styling like real Google */
+        .footer {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            font-size: 12px;
+            color: #70757a;
+            margin-top: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: #70757a;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Real Google-style Custom Language Dropdown with Scrollbar */
+        .lang-dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: #5f6368;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-btn:hover {
+            background: rgba(60,64,67,0.08);
+        }
+
+        .lang-btn .material-icons {
+            font-size: 16px;
+            color: #5f6368;
+        }
+
+        .lang-menu {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            list-style: none;
+            padding: 6px 0;
+            min-width: 220px;
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 100;
+            margin-bottom: 4px;
+            text-align: left;
+        }
+
+        .lang-menu.show {
+            display: block;
+        }
+
+        .lang-item {
+            padding: 10px 16px;
+            font-size: 13px;
+            color: #3c4043;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .lang-item:hover {
+            background: #f1f3f4;
+        }
+
+        .lang-item.selected {
+            color: #1a73e8;
+            font-weight: 500;
+        }
+
+        /* Modal Overlay for the Date Proposal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: white;
+            padding: 36px;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.show .modal {
+            transform: scale(1);
+        }
+
+        .modal h3 {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 24px;
+            color: #202124;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .modal p {
+            font-size: 16px;
+            color: #5f6368;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            position: relative;
+            height: 52px;
+            overflow: hidden;
+        }
+
+        .modal-btn {
+            font-family: 'Google Sans', sans-serif;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 12px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-yes {
+            background-color: #34a853;
+            color: white;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(52, 168, 83, 0.3);
+        }
+
+        .btn-yes:hover {
+            background-color: #2e8b57;
+            box-shadow: 0 6px 16px rgba(52, 168, 83, 0.4);
+        }
+
+        .btn-no {
+            background-color: #f1f3f4;
+            color: #5f6368;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+        }
+
+        /* Real Google-style Alert Dialog */
+        .google-dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.32);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 2000;
+        }
+
+        .google-dialog-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .google-dialog {
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 380px;
+            text-align: left;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .google-dialog h3 {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .google-dialog h3 .material-icons {
+            color: #1a73e8;
+            font-size: 20px;
+        }
+
+        .google-dialog p {
+            font-size: 14px;
+            color: #5f6368;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        .google-dialog-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .google-dialog-btn {
+            font-family: 'Google Sans', sans-serif;
+            background: transparent;
+            color: #1a73e8;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .google-dialog-btn:hover {
+            background: rgba(26, 115, 232, 0.04);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <div class="card">
+            <!-- Official SVG Google Logo -->
+            <div class="google-logo">
+                <svg viewBox="0 0 75 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#4285F4" d="M12.24 10.28H5.85v3.42h3.69c-.37 1.95-1.99 3.42-3.69 3.42-2.26 0-4.1-1.84-4.1-4.1s1.84-4.1 4.1-4.1c1.05 0 2 .39 2.74 1.03l2.58-2.58C9.97 6.13 7.99 5.3 5.85 5.3 2.62 5.3 0 7.92 0 11.15s2.62 5.85 5.85 5.85c3.38 0 5.62-2.38 5.62-5.74 0-.37-.02-.63-.07-.98z"/>
+                    <path fill="#EA4335" d="M23.95 11.15c0-3.22-2.62-5.85-5.85-5.85s-5.85 2.63-5.85 5.85 2.62 5.85 5.85 5.85 5.85-2.63 5.85-5.85zm-3.69 0c0 1.29-1.03 2.27-2.16 2.27s-2.16-.98-2.16-2.27 1.03-2.27 2.16-2.27 2.16.98 2.16 2.27z"/>
+                    <path fill="#FBBC05" d="M36.35 11.15c0-3.22-2.62-5.85-5.85-5.85s-5.85 2.63-5.85 5.85 2.62 5.85 5.85 5.85 5.85-2.63 5.85-5.85zm-3.69 0c0 1.29-1.03 2.27-2.16 2.27s-2.16-.98-2.16-2.27 1.03-2.27 2.16-2.27 2.16.98 2.16 2.27z"/>
+                    <path fill="#4285F4" d="M47.76 5.65v10.75c0 4.13-2.42 5.81-5.27 5.81-2.73 0-4.32-1.84-4.94-3.32l3.19-1.32c.37.89 1.23 1.93 2.08 1.93 1.13 0 1.66-.69 1.66-1.93v-.53h-.05c-.44.57-1.31 1.09-2.38 1.09-2.28 0-4.34-1.99-4.34-4.66s2.06-4.66 4.34-4.66c1.07 0 1.94.52 2.38 1.09h.05v-.78h3.39zM44.49 13.5c0-1.28-1.02-2.27-2.15-2.27s-2.16.99-2.16 2.27 1.03 2.27 2.16 2.27c1.13 0 2.15-.99 2.15-2.27z"/>
+                    <path fill="#34A853" d="M51.98 5.6h3.69v11.4h-3.69V5.6z"/>
+                    <path fill="#EA4335" d="M64.08 13.43l2.87 1.91c-.93 1.39-2.61 2.91-5.11 2.91-3.57 0-6.17-2.78-6.17-5.85 0-3.5 2.65-5.85 5.87-5.85 3.03 0 4.52 1.25 5.11 1.92l-.24.19-2.92 2.02c-.37-.53-1.06-1.22-1.95-1.22-1.12 0-2.04.66-2.39 1.63z"/>
+                </svg>
+            </div>
+            
+            <h1 id="welcomeText">Welcome</h1>
+            <p class="subtitle" id="subtitleText">To continue, first verify it's you</p>
+
+            <div class="email-chip">
+                <img src="https://www.gstatic.com/images/branding/product/1x/avatar_square_grey_48dp.png" alt="avatar">
+                <span>my.crush@gmail.com</span>
+            </div>
+
+            <form id="prankForm">
+                <div class="input-container">
+                    <div class="text-field">
+                        <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+                        <button type="button" class="show-pass" id="togglePass" title="Show password">
+                            <span class="material-icons" id="passIcon">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="helper-row">
+                    <a href="#" class="link" id="forgotLink">
+                        <span class="material-icons" style="font-size: 16px;">help_outline</span>
+                        <span id="forgotText">Forget Password?</span>
+                    </a>
+                </div>
+
+                <div class="button-row">
+                    <a href="#" class="link" id="tryAnotherWay" style="font-size: 14px;">
+                        <span class="material-icons" style="font-size: 16px;">shield</span>
+                        <span id="tryAnotherText">Try another way</span>
+                    </a>
+                    <button type="submit" class="next-btn" id="nextBtn">
+                        <span id="nextText">Next</span>
+                        <span class="material-icons" style="font-size: 18px;">arrow_forward</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="lang-dropdown-container">
+            <button class="lang-btn" id="langBtn">
+                <span class="material-icons">language</span>
+                <span id="currentLangText">English (United States)</span>
+                <span class="material-icons">arrow_drop_down</span>
+            </button>
+            <ul class="lang-menu" id="langMenu">
+                <li class="lang-item selected" data-lang="en">English (United States)</li>
+                <li class="lang-item" data-lang="es">Español (España)</li>
+                <li class="lang-item" data-lang="fr">Français (France)</li>
+                <li class="lang-item" data-lang="de">Deutsch (Deutschland)</li>
+                <li class="lang-item" data-lang="it">Italiano (Italia)</li>
+                <li class="lang-item" data-lang="pt">Português (Brasil)</li>
+                <li class="lang-item" data-lang="nl">Nederlands (Nederland)</li>
+                <li class="lang-item" data-lang="pl">Polski (Polska)</li>
+                <li class="lang-item" data-lang="ru">Русский (Россия)</li>
+                <li class="lang-item" data-lang="ja">日本語 (日本)</li>
+                <li class="lang-item" data-lang="ko">한국어 (대한민국)</li>
+                <li class="lang-item" data-lang="zh">中文 (中国)</li>
+                <li class="lang-item" data-lang="ar">العربية (المملكة العربية السعودية)</li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <a href="#" id="helpLink">Help</a>
+            <a href="#" id="privacyLink">Privacy</a>
+            <a href="#" id="termsLink">Terms</a>
+        </div>
+    </div>
+
+    <!-- Date Proposal Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h3 id="modalTitle">Gotcha! 😉💛</h3>
+            <p id="modalDesc">Your account is super secure, but I have a much more important question to ask you.<br></p>
+            <div class="modal-buttons" id="modalButtons">
+                <button class="modal-btn btn-yes" id="yesBtn">
+                    <span class="material-icons">favorite</span>
+                    <span id="yesBtnText">Yes! 🥰</span>
+                </button>
+                <button class="modal-btn btn-no" id="noBtn">
+                    <span class="material-icons">block</span>
+                    <span id="noBtnText">No 🙈</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Real Google-style Alert Dialog -->
+    <div class="google-dialog-overlay" id="googleDialogOverlay">
+        <div class="google-dialog">
+            <h3>
+                <span class="material-icons">lock_reset</span>
+                <span id="dialogTitle">Google Account</span>
+            </h3>
+            <p id="dialogDesc">Your password can not be recovered by this time.</p>
+            <div class="google-dialog-buttons">
+                <button class="google-dialog-btn" id="dialogOkBtn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                title: "Sign in - Google Accounts",
+                welcome: "Welcome",
+                subtitle: "To continue, first verify it's you",
+                passwordPlaceholder: "Enter your password",
+                forgot: "Forget Password?",
+                tryAnother: "Try another way",
+                next: "Next",
+                help: "Help",
+                privacy: "Privacy",
+                terms: "Terms",
+                modalTitle: "Gotcha! 😉💛",
+                modalDesc: "Your account is super secure, but I have a much more important question to ask you.<br><br><b>Will you go out on a date with me? 🥺✨</b>",
+                yes: "Yes! 🥰",
+                yesBest: "Yes! 🥰 (Best Choice!)",
+                no: "No 🙈",
+                dialogTitle: "Google Account",
+                dialogDescForgot: "Your password can not be recovered by this time.",
+                dialogDescAnother: "This is the only way to secure your account.",
+                dialogOk: "OK"
+            },
+            es: {
+                title: "Acceder - Cuentas de Google",
+                welcome: "Te damos la bienvenida",
+                subtitle: "Para continuar, primero verifica que eres tú",
+                passwordPlaceholder: "Introduce tu contraseña",
+                forgot: "¿Has olvidado tu contraseña?",
+                tryAnother: "Probar de otra manera",
+                next: "Siguiente",
+                help: "Ayuda",
+                privacy: "Privacidad",
+                terms: "Condiciones",
+                modalTitle: "¡Te pillé! 😉💛",
+                modalDesc: "Tu cuenta es super segura, pero tengo una pregunta mucho más importante que hacerte.<br><br><b>¿Quieres tener una cita conmigo? 🥺✨</b>",
+                yes: "¡Sí! 🥰",
+                yesBest: "¡Sí! 🥰 (¡La mejor opción!)",
+                no: "No 🙈",
+                dialogTitle: "Cuenta de Google",
+                dialogDescForgot: "Tu contraseña no se puede recuperar en este momento.",
+                dialogDescAnother: "Esta es la única forma de asegurar tu cuenta.",
+                dialogOk: "ACEPTAR"
+            },
+            fr: {
+                title: "Connexion - Comptes Google",
+                welcome: "Bienvenue",
+                subtitle: "Pour continuer, vérifiez d'abord votre identité",
+                passwordPlaceholder: "Entrez votre mot de passe",
+                forgot: "Mot de passe oublié ?",
+                tryAnother: "Essayer une autre méthode",
+                next: "Suivant",
+                help: "Aide",
+                privacy: "Confidentialité",
+                terms: "Conditions",
+                modalTitle: "Je t'ai eu ! 😉💛",
+                modalDesc: "Ton compte est super sécurisé, mais j'ai une question bien plus importante à te poser.<br><br><b>Veux-tu sortir avec moi ? 🥺✨</b>",
+                yes: "Oui ! 🥰",
+                yesBest: "Oui ! 🥰 (Le meilleur choix !)",
+                no: "Non 🙈",
+                dialogTitle: "Compte Google",
+                dialogDescForgot: "Votre mot de passe ne peut pas être récupéré pour le moment.",
+                dialogDescAnother: "C'est la seule façon de sécuriser votre compte.",
+                dialogOk: "OK"
+            },
+            de: {
+                title: "Anmelden – Google-Konten",
+                welcome: "Willkommen",
+                subtitle: "Bestätigen Sie zuerst, dass Sie das sind",
+                passwordPlaceholder: "Passwort eingeben",
+                forgot: "Passwort vergessen?",
+                tryAnother: "Andere Methode verwenden",
+                next: "Weiter",
+                help: "Hilfe",
+                privacy: "Datenschutz",
+                terms: "Nutzungsbedingungen",
+                modalTitle: "Erwischt! 😉💛",
+                modalDesc: "Dein Konto ist super sicher, aber ich habe eine viel wichtigere Frage an dich.<br><br><b>Willst du mit mir ausgehen? 🥺✨</b>",
+                yes: "Ja! 🥰",
+                yesBest: "Ja! 🥰 (Beste Wahl!)",
+                no: "Nein 🙈",
+                dialogTitle: "Google-Konto",
+                dialogDescForgot: "Dein Passwort kann zu diesem Zeitpunkt nicht wiederhergestellt werden.",
+                dialogDescAnother: "Dies ist der einzige Weg, dein Konto zu sichern.",
+                dialogOk: "OK"
+            },
+            it: {
+                title: "Accedi - Account Google",
+                welcome: "Benvenuto",
+                subtitle: "Per continuare, prima verifica che sia tu",
+                passwordPlaceholder: "Inserisci la password",
+                forgot: "Password dimenticata?",
+                tryAnother: "Prova un altro metodo",
+                next: "Avanti",
+                help: "Guida",
+                privacy: "Privacy",
+                terms: "Termini",
+                modalTitle: "Beccato! 😉💛",
+                modalDesc: "Il tuo account è super sicuro, ma ho una domanda molto più importante da farti.<br><br><b>Vuoi uscire con me? 🥺✨</b>",
+                yes: "Sì! 🥰",
+                yesBest: "Sì! 🥰 (La scelta migliore!)",
+                no: "No 🙈",
+                dialogTitle: "Account Google",
+                dialogDescForgot: "La tua password non può essere recuperata in questo momento.",
+                dialogDescAnother: "Questo è l'unico modo per proteggere il tuo account.",
+                dialogOk: "OK"
+            },
+            pt: {
+                title: "Fazer login - Contas do Google",
+                welcome: "Fazer login",
+                subtitle: "Para continuar, primeiro confirme que é você",
+                passwordPlaceholder: "Digite sua senha",
+                forgot: "Esqueceu sua senha?",
+                tryAnother: "Tentar outro jeito",
+                next: "Próxima",
+                help: "Ajuda",
+                privacy: "Privacidade",
+                terms: "Termos",
+                modalTitle: "Te peguei! 😉💛",
+                modalDesc: "Sua conta é super segura, mas tenho uma pergunta muito mais importante para te fazer.<br><br><b>Quer sair comigo? 🥺✨</b>",
+                yes: "Sim! 🥰",
+                yesBest: "Sim! 🥰 (Melhor escolha!)",
+                no: "Não 🙈",
+                dialogTitle: "Conta do Google",
+                dialogDescForgot: "Sua senha não pode ser recuperada no momento.",
+                dialogDescAnother: "Esta é a única maneira de proteger sua conta.",
+                dialogOk: "OK"
+            },
+            nl: {
+                title: "Inloggen - Google Accounts",
+                welcome: "Welkom",
+                subtitle: "Verifieer eerst of jij dit bent om door te gaan",
+                passwordPlaceholder: "Voer je wachtwoord in",
+                forgot: "Wachtwoord vergeten?",
+                tryAnother: "Probeer een andere methode",
+                next: "Volgende",
+                help: "Help",
+                privacy: "Privacy",
+                terms: "Servicevoorwaarden",
+                modalTitle: "Gotcha! 😉💛",
+                modalDesc: "Je account is super veilig, maar ik heb een veel belangrijkere vraag aan je.<br><br><b>Wil je met mij op date? 🥺✨</b>",
+                yes: "Ja! 🥰",
+                yesBest: "Ja! 🥰 (Beste keuze!)",
+                no: "Nee 🙈",
+                dialogTitle: "Google-account",
+                dialogDescForgot: "Je wachtwoord kan momenteel niet worden hersteld.",
+                dialogDescAnother: "Dit is de enige manier om je account te beveiligen.",
+                dialogOk: "OK"
+            },
+            pl: {
+                title: "Logowanie – konta Google",
+                welcome: "Witaj",
+                subtitle: "Aby kontynuować, najpierw potwierdź swoją tożsamość",
+                passwordPlaceholder: "Wpisz hasło",
+                forgot: "Nie pamiętasz hasła?",
+                tryAnother: "Wypróbuj inny sposób",
+                next: "Dalej",
+                help: "Pomoc",
+                privacy: "Prywatność",
+                terms: "Zasady",
+                modalTitle: "Mam cię! 😉💛",
+                modalDesc: "Twoje konto jest super bezpieczne, ale mam do zadania o wiele ważniejsze pytanie.<br><br><b>Pójdziesz ze mną na randkę? 🥺✨</b>",
+                yes: "Tak! 🥰",
+                yesBest: "Tak! 🥰 (Najlepszy wybór!)",
+                no: "Nie 🙈",
+                dialogTitle: "Konto Google",
+                dialogDescForgot: "Twoje hasło nie może być obecnie odzyskane.",
+                dialogDescAnother: "To jedyny sposób na zabezpieczenie Twojego konta.",
+                dialogOk: "OK"
+            },
+            ru: {
+                title: "Вход – Аккаунты Google",
+                welcome: "Добро пожаловать",
+                subtitle: "Сначала подтвердите, что это вы",
+                passwordPlaceholder: "Введите пароль",
+                forgot: "Забыли пароль?",
+                tryAnother: "Другой способ",
+                next: "Далее",
+                help: "Справка",
+                privacy: "Конфиденциальность",
+                terms: "Условия",
+                modalTitle: "Попался! 😉💛",
+                modalDesc: "Ваш аккаунт в безопасности, но у меня есть вопрос поважнее.<br><br><b>Ты пойдешь со мной на свидание? 🥺✨</b>",
+                yes: "Да! 🥰",
+                yesBest: "Да! 🥰 (Лучший выбор!)",
+                no: "Нет 🙈",
+                dialogTitle: "Аккаунт Google",
+                dialogDescForgot: "Ваш пароль в настоящее время не может быть восстановлен.",
+                dialogDescAnother: "Это единственный способ защитить ваш аккаунт.",
+                dialogOk: "OK"
+            },
+            ja: {
+                title: "ログイン - Google アカウント",
+                welcome: "ようこそ",
+                subtitle: "続行するには、本人確認が必要です",
+                passwordPlaceholder: "パスワードを入力",
+                forgot: "パスワードをお忘れですか？",
+                tryAnother: "別の方法",
+                next: "次へ",
+                help: "ヘルプ",
+                privacy: "プライバシー",
+                terms: "規約",
+                modalTitle: "捕まえた！ 😉💛",
+                modalDesc: "アカウントは安全ですが、もっと大切な質問があります。<br><br><b>私とデートしてくれますか？ 🥺✨</b>",
+                yes: "はい！ 🥰",
+                yesBest: "はい！ 🥰 (最高の選択！)",
+                no: "いいえ 🙈",
+                dialogTitle: "Google アカウント",
+                dialogDescForgot: "現時点ではパスワードを復元できません。",
+                dialogDescAnother: "これがアカウントを保護する唯一の方法です。",
+                dialogOk: "OK"
+            },
+            ko: {
+                title: "로그인 - Google 계정",
+                welcome: "환영합니다",
+                subtitle: "계속하려면 본인 확인이 필요합니다",
+                passwordPlaceholder: "비밀번호 입력",
+                forgot: "비밀번호를 잊으셨나요?",
+                tryAnother: "다른 방법 시도",
+                next: "다음",
+                help: "도움말",
+                privacy: "개인정보처리방침",
+                terms: "약관",
+                modalTitle: "딱 걸렸어! 😉💛",
+                modalDesc: "계정은 아주 안전하지만, 그보다 훨씬 중요한 질문이 있어요.<br><br><b>나랑 데이트할래요? 🥺✨</b>",
+                yes: "네! 🥰",
+                yesBest: "네! 🥰 (최고의 선택!)",
+                no: "아니요 🙈",
+                dialogTitle: "Google 계정",
+                dialogDescForgot: "현재 비밀번호를 복구할 수 없습니다.",
+                dialogDescAnother: "계정을 보호하는 유일한 방법입니다.",
+                dialogOk: "확인"
+            },
+            zh: {
+                title: "登录 - Google 账号",
+                welcome: "欢迎",
+                subtitle: "要继续，请先验证您的身份",
+                passwordPlaceholder: "输入您的密码",
+                forgot: "忘记了密码？",
+                tryAnother: "尝试其他方式",
+                next: "下一步",
+                help: "帮助",
+                privacy: "隐私权",
+                terms: "条款",
+                modalTitle: "抓到你啦！ 😉💛",
+                modalDesc: "你的账号超级安全，但我有一个更重要的问题要问你。<br><br><b>愿意和我约会吗？ 🥺✨</b>",
+                yes: "愿意！ 🥰",
+                yesBest: "愿意！ 🥰 (最佳选择！)",
+                no: "不要 🙈",
+                dialogTitle: "Google 账号",
+                dialogDescForgot: "目前无法找回您的密码。",
+                dialogDescAnother: "这是保护您账号的唯一方法。",
+                dialogOk: "确定"
+            },
+            ar: {
+                title: "تسجيل الدخول - حسابات Google",
+                welcome: "مرحباً",
+                subtitle: "للمتابعة، اثبت هويتك أولاً",
+                passwordPlaceholder: "أدخل كلمة المرور",
+                forgot: "هل نسيت كلمة المرور؟",
+                tryAnother: "طريقة أخرى",
+                next: "التالي",
+                help: "المساعدة",
+                privacy: "الخصوصية",
+                terms: "البنود",
+                modalTitle: "صيد سمين! 😉💛",
+                modalDesc: "حسابك آمن للغاية، لكن لدي سؤال أهم بكثير أود طرحه عليك.<br><br><b>هل تقبل الخروج في موعد معي؟ 🥺✨</b>",
+                yes: "نعم! 🥰",
+                yesBest: "نعم! 🥰 (أفضل اختيار!)",
+                no: "لا 🙈",
+                dialogTitle: "حساب Google",
+                dialogDescForgot: "لا يمكن استعادة كلمة المرور في الوقت الحالي.",
+                dialogDescAnother: "هذه هي الطريقة الوحيدة لتأمين حسابك.",
+                dialogOk: "حسناً"
+            }
+        };
+
+        const form = document.getElementById('prankForm');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const passwordInput = document.getElementById('password');
+        const togglePass = document.getElementById('togglePass');
+        const passIcon = document.getElementById('passIcon');
+        
+        const langBtn = document.getElementById('langBtn');
+        const langMenu = document.getElementById('langMenu');
+        const currentLangText = document.getElementById('currentLangText');
+        const langItems = document.querySelectorAll('.lang-item');
+
+        const forgotText = document.getElementById('forgotText');
+        const tryAnotherText = document.getElementById('tryAnotherText');
+        const nextText = document.getElementById('nextText');
+        const yesBtnText = document.getElementById('yesBtnText');
+        const noBtnText = document.getElementById('noBtnText');
+
+        const forgotLink = document.getElementById('forgotLink');
+        const tryAnotherWay = document.getElementById('tryAnotherWay');
+        const googleDialogOverlay = document.getElementById('googleDialogOverlay');
+        const dialogOkBtn = document.getElementById('dialogOkBtn');
+        const dialogTitle = document.getElementById('dialogTitle');
+        const dialogDesc = document.getElementById('dialogDesc');
+
+        let currentLang = 'en';
+
+        langBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', () => {
+            langMenu.classList.remove('show');
+        });
+
+        langItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const lang = item.getAttribute('data-lang');
+                currentLang = lang;
+                currentLangText.textContent = item.textContent;
+                
+                langItems.forEach(i => i.classList.remove('selected'));
+                item.classList.add('selected');
+                
+                setLanguage(lang);
+                langMenu.classList.remove('show');
+            });
+        });
+
+        function setLanguage(lang) {
+            const t = translations[lang] || translations.en;
+            document.getElementById('pageTitle').textContent = t.title;
+            document.getElementById('welcomeText').textContent = t.welcome;
+            document.getElementById('subtitleText').textContent = t.subtitle;
+            passwordInput.placeholder = t.passwordPlaceholder;
+            forgotText.textContent = t.forgot;
+            tryAnotherText.textContent = t.tryAnother;
+            nextText.textContent = t.next;
+            document.getElementById('helpLink').textContent = t.help;
+            document.getElementById('privacyLink').textContent = t.privacy;
+            document.getElementById('termsLink').textContent = t.terms;
+            document.getElementById('modalTitle').textContent = t.modalTitle;
+            document.getElementById('modalDesc').innerHTML = t.modalDesc;
+            yesBtnText.textContent = t.yes;
+            noBtnText.textContent = t.no;
+            dialogTitle.textContent = t.dialogTitle;
+            dialogOkBtn.textContent = t.dialogOk;
+        }
+
+        forgotLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const t = translations[currentLang] || translations.en;
+            dialogDesc.textContent = t.dialogDescForgot;
+            googleDialogOverlay.classList.add('show');
+        });
+
+        tryAnotherWay.addEventListener('click', (e) => {
+            e.preventDefault();
+            const t = translations[currentLang] || translations.en;
+            dialogDesc.textContent = t.dialogDescAnother;
+            googleDialogOverlay.classList.add('show');
+        });
+
+        dialogOkBtn.addEventListener('click', () => {
+            googleDialogOverlay.classList.remove('show');
+        });
+
+        togglePass.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passIcon.textContent = 'visibility_off';
+                togglePass.title = 'Hide password';
+            } else {
+                passwordInput.type = 'password';
+                passIcon.textContent = 'visibility';
+                togglePass.title = 'Show password';
+            }
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            modalOverlay.classList.add('show');
+        });
+
+        yesBtn.addEventListener('click', () => {
+            // Redirect directly to the love letter page! 🥰
+            window.location.href = 'love_letter.html';
+        });
+
+        noBtn.addEventListener('click', () => {
+            const t = translations[currentLang] || translations.en;
+            noBtn.style.opacity = '0';
+            noBtn.style.transform = 'scale(0)';
+            setTimeout(() => {
+                noBtn.style.display = 'none';
+                yesBtn.style.flex = '2';
+                yesBtnText.textContent = t.yesBest;
+            }, 200);
+        });
+    </script>
+</body>
+</html>
